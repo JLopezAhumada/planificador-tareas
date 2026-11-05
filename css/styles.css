@@ -1,0 +1,11 @@
+body {
+  background-color: #f4f6f9;
+}
+
+.task-card {
+  border-left: 4px solid #0d6efd;
+}
+
+.task-card .card-text {
+  min-height: 48px;
+}
