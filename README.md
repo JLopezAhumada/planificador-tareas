@@ -10,6 +10,6 @@ Aplicación web para registrar y organizar tareas. Permite crear una tarea con n
 
 ## Enlaces
 
-- Trello: _pendiente_
-- Figma: _pendiente_
-- Demo (GitHub Pages): _pendiente_
+- Trello: pendiente
+- Figma: pendiente
+- Demo (GitHub Pages): pendiente
