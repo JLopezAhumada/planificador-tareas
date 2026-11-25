@@ -9,3 +9,13 @@ body {
 .task-card .card-text {
   min-height: 48px;
 }
+
+.task-card.task-done {
+  border-left-color: #198754;
+  background-color: #eef7f1;
+}
+
+.task-card.task-done .card-title {
+  text-decoration: line-through;
+  color: #6c757d;
+}

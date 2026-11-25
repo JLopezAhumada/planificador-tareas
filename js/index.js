@@ -1,9 +1,20 @@
+const taskManager = new TaskManager();
+
+taskManager.addTask('Estudiar para el parcial', 'Repasar los temas de HTML, CSS y Bootstrap vistos en clase.', '2026-11-12');
+taskManager.addTask('Wireframe en Figma', 'Diseñar las pantallas principales del planificador.', '2026-11-08', 'ENPROGRESO');
+taskManager.addTask('Tablero de Trello', 'Organizar las tareas del Sprint 1 en columnas.', '2026-11-01', 'HECHO');
+taskManager.addTask('Informe de redes', 'Documentar la topología y la configuración de los routers.', '2026-11-20');
+taskManager.addTask('Exposición de inglés', 'Preparar las diapositivas y practicar la presentación.', '2026-11-15', 'ENPROGRESO');
+
+console.log(taskManager.tasks);
+
 const newTaskForm = document.querySelector('#newTaskForm');
 const newTaskNameInput = document.querySelector('#newTaskNameInput');
 const newTaskDescriptionInput = document.querySelector('#newTaskDescriptionInput');
 const newTaskDateInput = document.querySelector('#newTaskDateInput');
 const newTaskStatusInput = document.querySelector('#newTaskStatusInput');
 const errorAlert = document.querySelector('#errorAlert');
+const taskList = document.querySelector('#taskList');
 
 function validFormFieldInput(data) {
   const errors = [];
@@ -47,6 +58,22 @@ newTaskForm.addEventListener('submit', function (event) {
     showErrors(errors);
   } else {
     hideErrors();
+    taskManager.addTask(data.name, data.description, data.date, data.status);
+    console.log(taskManager.tasks);
+    taskManager.render();
     newTaskForm.reset();
   }
 });
+
+taskList.addEventListener('click', function (event) {
+  if (event.target.classList.contains('done-button')) {
+    const parentTask = event.target.closest('.task-card');
+    const taskId = Number(parentTask.dataset.taskId);
+    const task = taskManager.tasks.find(task => task.id === taskId);
+
+    task.status = task.status === 'HECHO' ? 'PORHACER' : 'HECHO';
+    taskManager.render();
+  }
+});
+
+taskManager.render();
