@@ -16,6 +16,4 @@ Aplicación web para registrar y organizar tareas. Permite crear una tarea con n
 
 ## Enlaces
 
-- Trello: pendiente
-- Figma: pendiente
-- Demo (GitHub Pages): pendiente
+- GitHub Pages: https://jlopezahumada.github.io/planificador-tareas/
