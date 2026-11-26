@@ -1,10 +1,15 @@
 const taskManager = new TaskManager();
 
-taskManager.addTask('Estudiar para el parcial', 'Repasar los temas de HTML, CSS y Bootstrap vistos en clase.', '2026-11-12');
-taskManager.addTask('Wireframe en Figma', 'Diseñar las pantallas principales del planificador.', '2026-11-08', 'ENPROGRESO');
-taskManager.addTask('Tablero de Trello', 'Organizar las tareas del Sprint 1 en columnas.', '2026-11-01', 'HECHO');
-taskManager.addTask('Informe de redes', 'Documentar la topología y la configuración de los routers.', '2026-11-20');
-taskManager.addTask('Exposición de inglés', 'Preparar las diapositivas y practicar la presentación.', '2026-11-15', 'ENPROGRESO');
+taskManager.load();
+
+if (localStorage.getItem('tasks') === null) {
+  taskManager.addTask('Estudiar para el parcial', 'Repasar los temas de HTML, CSS y Bootstrap vistos en clase.', '2026-11-12');
+  taskManager.addTask('Wireframe en Figma', 'Diseñar las pantallas principales del planificador.', '2026-11-08', 'ENPROGRESO');
+  taskManager.addTask('Tablero de Trello', 'Organizar las tareas del Sprint 1 en columnas.', '2026-11-01', 'HECHO');
+  taskManager.addTask('Informe de redes', 'Documentar la topología y la configuración de los routers.', '2026-11-20');
+  taskManager.addTask('Exposición de inglés', 'Preparar las diapositivas y practicar la presentación.', '2026-11-15', 'ENPROGRESO');
+  taskManager.save();
+}
 
 console.log(taskManager.tasks);
 
@@ -59,6 +64,7 @@ newTaskForm.addEventListener('submit', function (event) {
   } else {
     hideErrors();
     taskManager.addTask(data.name, data.description, data.date, data.status);
+    taskManager.save();
     console.log(taskManager.tasks);
     taskManager.render();
     newTaskForm.reset();
@@ -72,6 +78,16 @@ taskList.addEventListener('click', function (event) {
     const task = taskManager.tasks.find(task => task.id === taskId);
 
     task.status = task.status === 'HECHO' ? 'PORHACER' : 'HECHO';
+    taskManager.save();
+    taskManager.render();
+  }
+
+  if (event.target.classList.contains('delete-button')) {
+    const parentTask = event.target.closest('.task-card');
+    const taskId = Number(parentTask.dataset.taskId);
+
+    taskManager.deleteTask(taskId);
+    taskManager.save();
     taskManager.render();
   }
 });

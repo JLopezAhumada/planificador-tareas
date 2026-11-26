@@ -25,7 +25,10 @@ function createTaskHtml(id, name, description, dueDate, status) {
         </div>
         <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
           <span class="small text-secondary">Entrega: ${formatDate(dueDate)}</span>
-          <button type="button" class="done-button btn btn-sm ${done ? 'btn-success' : 'btn-outline-success'}">${done ? 'Desmarcar' : 'Marcar como hecha'}</button>
+          <div class="d-flex gap-2">
+            <button type="button" class="done-button btn btn-sm ${done ? 'btn-success' : 'btn-outline-success'}">${done ? 'Desmarcar' : 'Marcar como hecha'}</button>
+            <button type="button" class="delete-button btn btn-sm btn-outline-danger">Eliminar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -48,6 +51,33 @@ class TaskManager {
       dueDate: dueDate,
       status: status
     });
+  }
+
+  deleteTask(taskId) {
+    const newTasks = [];
+
+    for (let task of this.tasks) {
+      if (task.id !== taskId) {
+        newTasks.push(task);
+      }
+    }
+
+    this.tasks = newTasks;
+  }
+
+  save() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    localStorage.setItem('currentId', String(this.currentId));
+  }
+
+  load() {
+    if (localStorage.getItem('tasks')) {
+      this.tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    if (localStorage.getItem('currentId')) {
+      this.currentId = Number(localStorage.getItem('currentId'));
+    }
   }
 
   render() {

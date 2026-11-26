@@ -8,6 +8,12 @@ Aplicación web para registrar y organizar tareas. Permite crear una tarea con n
 - Tarea 2: tarjeta de tarea y lista con cinco tareas de ejemplo.
 - Tarea 3: validación del formulario con JavaScript (`validFormFieldInput`) y mensajes de error.
 
+## Sprint 2
+
+- Tarea 4: clase `TaskManager` con `addTask` para guardar las tareas y agregarlas desde el formulario.
+- Tarea 5: método `render` que muestra las tareas en tarjetas y botón «Marcar como hecha» para cambiar el estado.
+- Tarea 6: botón «Eliminar» con `deleteTask` y tareas guardadas en localStorage con `save` y `load`.
+
 ## Enlaces
 
 - Trello: pendiente
